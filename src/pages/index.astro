@@ -1,17 +1,35 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Hero from '../components/Hero.astro';
+import Timeline from '../components/Timeline.astro';
+import GridRegalos from '../components/GridRegalos.astro';
+import Fireworks from "../components/Fireworks.astro";
 
+import { strings } from '../data/strings';
+const { timeline, gifts } = strings;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={strings.seo.title} description={strings.seo.description}>
+	<!-- Bloque de bienvenida y avatar con la carta oculta -->
+	<Hero />
+
+	<!-- Sección de la línea de tiempo (vuestros momentos) -->
+	<section class="py-2">
+		<h2 class="text-xl font-black text-center text-base-content/90 mb-6 tracking-tight">
+			{timeline.sectionTitle}
+		</h2>
+		<Timeline />
+	</section>
+
+	<!-- Sección interactiva de los regalos (desplegables) -->
+	<section class="bg-base-200/50 p-4 rounded-2xl border border-base-300/30">
+		<h2 class="text-lg font-bold text-center text-base-content mb-1 tracking-tight">
+			{gifts.sectionTitle}
+		</h2>
+		<p class="text-[11px] text-center text-base-content/60 mb-4">
+			{gifts.subtitle}
+		</p>
+		<GridRegalos />
+	</section>
+	<Fireworks />
+</Layout>

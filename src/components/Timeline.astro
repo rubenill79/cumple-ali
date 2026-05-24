@@ -1,0 +1,22 @@
+---
+import { strings } from '../data/strings';
+const { timeline } = strings;
+---
+<ul class="timeline timeline-vertical timeline-compact">
+  {timeline.steps.map((step, index) => (
+    <li>
+      {index !== 0 && <hr class="bg-primary"/>}
+      <div class="timeline-middle w-7 h-7 flex items-center justify-center">
+        <span class="bg-primary text-primary-content px-2 py-0.5 rounded-full text-xs font-bold">
+          {step.num}
+        </span>
+      </div>
+      <div class="timeline-end timeline-box mb-4 w-full">
+        <time class="font-mono italic text-xs text-base-content/60">{step.time}</time>
+        <div class="text-sm font-semibold">{step.title}</div>
+        <p class="text-xs text-base-content/70 mt-1" set:html={step.desc} />
+      </div>
+      {index !== timeline.steps.length - 1 && <hr class="bg-primary"/>}
+    </li>
+  ))}
+</ul>

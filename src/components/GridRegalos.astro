@@ -1,0 +1,21 @@
+---
+import { strings } from "../data/strings";
+const { gifts } = strings;
+---
+
+<div class="grid grid-cols-2 gap-3">
+  {
+    gifts.items.map((item) => (
+      <div class="collapse collapse-arrow bg-base-100 border border-base-300 rounded-xl">
+        <input type="checkbox" />
+        <div class="collapse-title text-sm font-bold pr-2 flex items-center gap-1">
+          {item.icon} {item.title}
+        </div>
+        <div class="collapse-content text-xs text-base-content/80">
+          <p class="font-semibold text-secondary">{item.hintTitle}</p>
+          <p class="mt-1 leading-relaxed" set:html={item.hintDesc} />
+        </div>
+      </div>
+    ))
+  }
+</div>

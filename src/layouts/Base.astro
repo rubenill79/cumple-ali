@@ -1,0 +1,50 @@
+---
+export interface Props {
+    title: string;
+    description: string;
+    canonical?: string;
+    image?: string;
+}
+
+const { title, description, canonical, image = '/favicon.svg' } = Astro.props;
+
+const determineCanonicalURL = () => {
+	if (Astro.url.host.includes("localhost")) return "http://localhost:4321"
+	return canonical || Astro.url.pathname
+}
+
+const canonicalURL = new URL(determineCanonicalURL(), Astro.site)
+---
+
+<!-- Basic HTML Meta Tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#fbcfe8" />
+<meta name="language" content="ES">
+<meta name="author" content="Rubén Lázaro, ruben.lazaro.es@gmail.com">
+
+<!-- Privacidad (Para que Google no indexe el regalo) -->
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- HTML Link Tags -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:site_name" content="Feliz Cumpleaños" />
+<meta property="og:description" content={description} />
+
+<!-- Apple Meta Tags -->
+<meta name="apple-mobile-web-app-title" content={title}>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="apple-touch-icon" href="/favicon.svg" />

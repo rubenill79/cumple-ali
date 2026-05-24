@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+import Base from "../layouts/Base.astro";
+
+import { strings } from "../data/strings";
+const { global } = strings;
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang={"es"}>
+	<head>
+		<Base title={title} description={description} />
+	</head>
+	<body
+		class="bg-base-200 min-h-screen font-['Plus_Jakarta_Sans',sans-serif]"
+	>
+		<div
+			class="max-w-md md:max-w-2xl mx-auto bg-base-100 min-h-screen shadow-xl flex flex-col justify-between"
+		>
+			<header
+				class="navbar bg-base-100/80 backdrop-blur sticky top-0 z-50 border-b border-base-200 px-4"
+			>
+				<div class="flex-1">
+					<a class="text-xl font-bold text-pink-400"
+						>{global.navTitle}</a
+					>
+				</div>
+				<div class="flex-none">
+					<span class="badge badge-secondary font-semibold"
+						>{global.dateBadge}</span
+					>
+				</div>
+			</header>
+
+			<main class="grow p-4 space-y-8">
+				<slot />
+			</main>
+
+			<footer
+				class="footer footer-center p-4 bg-base-200 text-base-content text-xs"
+			>
+				<aside>
+					<p>{global.footerText}</p>
+				</aside>
+			</footer>
+		</div>
+	</body>
+</html>
